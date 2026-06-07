@@ -21,16 +21,28 @@ jobs:
       - name: Update month and partner links
         run: |
           month=$(date +'%B')
-          file=$(find . -type f -name "*InvisiProxy.md" | head -n 1)
+          file="web browse/Proxies/Proxy Links/Existing Proxy Links/⭐️ InvisiProxy/⭐️ InvisiProxy.md"
+          archive="web browse/Proxies/Proxy Links/Existing Proxy Links/⭐️ InvisiProxy/InvisiProxy Links Archive.md"
 
-          # Extract inner text (domains) instead of href, skip blanks
+          # Archive old section if present
+          if grep -q '^### Current Month'\''s Links' "$file"; then
+            sed -n '/^### Current Month'\''s Links/,$p' "$file" > old_section.md
+            {
+              echo "### Archived Links ($month)"
+              echo ""
+              tail -n +2 old_section.md   # skip the header line
+              echo ""
+            } >> "$archive"
+          fi
+
+          # Extract only real domains (exclude descriptive text)
           curl -s https://invisiproxy.com/partners \
-          | sed -n '/<div class="glist">/,/<\/div>/p' \
-          | grep -oP '(?<=>)[^<]+' \
-          | grep -E '([a-zA-Z0-9-]+\.)+(org|com|net|space|xyz|lol|life|bio|run|school|dev|world|info)$' \
-          > partners.txt
+            | sed -n '/<div class="glist">/,/<\/div>/p' \
+            | grep -oP '(?<=>)[^<]+' \
+            | grep -E '([a-zA-Z0-9-]+\.)+(org|com|net|space|xyz|lol|life|bio|run|school|dev|world|info)$' \
+            > partners.txt
 
-
+          # Build new section
           {
             echo "### Current Month's Links ($month)"
             echo ""
@@ -51,6 +63,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update MONTH placeholder and partner links"
+            git commit -m "Archive old links and update with new month"
             git push origin HEAD
           fi
