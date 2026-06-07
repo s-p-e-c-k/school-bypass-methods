@@ -2,11 +2,11 @@ name: Update Repo Month
 
 on:
   schedule:
-    - cron: '0 0 1 * *'   # Runs at midnight UTC on the 1st of every month
+    - cron: '0 0 1 * *'
   workflow_dispatch:
 
 permissions:
-  contents: write   # Allow pushing commits back to the repo
+  contents: write
 
 jobs:
   update-month:
@@ -18,18 +18,19 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          ref: main   # Change if your default branch is 'master'
+          ref: main   # change if your default branch is 'master'
 
       - name: Update MONTH placeholder
         run: |
           month=$(date +'%B')
-          # Find the target file by name and replace (MONTH)
-          file=$(find . -type f -name "*InvisiProxy.md")
+          file=$(find . -type f -name "*InvisiProxy.md" | head -n 1)
           sed -i "s/(MONTH)/($month)/g" "$file"
 
       - name: Fetch partner links
         run: |
           month=$(date +'%B')
+          file=$(find . -type f -name "*InvisiProxy.md" | head -n 1)
+
           curl -s https://invisiproxy.com/partners \
             | grep -oP '(?<=href=")https?://[^"]+' \
             > partners.txt
@@ -40,7 +41,7 @@ jobs:
             while read -r link; do
               echo "- [$link]($link)"
             done < partners.txt
-          } >> $(find . -type f -name "*InvisiProxy.md")
+          } >> "$file"
 
       - name: Commit changes
         run: |
