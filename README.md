@@ -3,9 +3,9 @@ a collection of the best bypass methods for school! (for MacOS)
 ---
 # Star Roadmap
 ---
-## 50 Stars = Windows version of everything
-## 100 Stars = ChromeOS version of everything
-## 200 Stars = Linux version of everything (why is your school using linux bruh 😭)
+## 15 Stars = Windows version of everything
+## 25 Stars = ChromeOS version of everything
+## 35 Stars = Linux version of everything (why is your school using linux bruh 😭)
 
 written by s-p-e-c-k (s_p_e_c_k on Discord)
 
