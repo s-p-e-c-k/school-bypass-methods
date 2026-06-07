@@ -23,7 +23,7 @@ jobs:
       - name: Update MONTH placeholder
         run: |
           month=$(date +'%B')
-          sed -i "s/(MONTH)/($month)/g" "school-bypass-methods/web browse/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+          sed -i "s/(MONTH)/($month)/g" "web browse/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
 
       - name: Fetch partner links
         run: |
@@ -32,10 +32,10 @@ jobs:
             | grep -oP '(?<=href=")https?://[^"]+' \
             > partners.txt
 
-          echo "" >> "school-bypass-methods/web browse/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
-          echo "### Partner Links ($month)" >> "school-bypass-methods/web browse/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+          echo "" >> "web browse/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+          echo "### Partner Links ($month)" >> "web browse/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
           while read -r link; do
-            echo "- [$link]($link)" >> "school-bypass-methods/web browse/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+            echo "- [$link]($link)" >> "web browse/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
           done < partners.txt
 
       - name: Commit changes
