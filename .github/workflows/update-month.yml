@@ -25,10 +25,11 @@ jobs:
 
           # Extract inner text (domains) instead of href, skip blanks
           curl -s https://invisiproxy.com/partners \
-            | sed -n '/<div class="glist">/,/<\/div>/p' \
-            | grep -oP '(?<=>)[^<]+' \
-            | grep -v '^$' \
-            > partners.txt
+          | sed -n '/<div class="glist">/,/<\/div>/p' \
+          | grep -oP '(?<=>)[^<]+' \
+          | grep -E '([a-zA-Z0-9-]+\.)+(org|com|net|space|xyz|lol|life|bio|run|school|dev|world|info)$' \
+          > partners.txt
+
 
           {
             echo "### Current Month's Links ($month)"
