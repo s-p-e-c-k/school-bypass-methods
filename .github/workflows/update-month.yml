@@ -27,6 +27,7 @@ jobs:
           curl -s https://invisiproxy.com/partners \
             | sed -n '/<div class="glist">/,/<\/div>/p' \
             | grep -oP '(?<=>)[^<]+'
+            | grep -v '^$' \
             > partners.txt
 
           # Build new section
