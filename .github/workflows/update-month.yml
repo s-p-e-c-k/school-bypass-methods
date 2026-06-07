@@ -18,19 +18,18 @@ jobs:
         with:
           ref: main   # change if your default branch is 'master'
 
-      - name: Update month and partner links
+      - name: Archive old links and update
         run: |
           month=$(date +'%B')
           file="web browse/Proxies/Proxy Links/Existing Proxy Links/⭐️ InvisiProxy/⭐️ InvisiProxy.md"
           archive="web browse/Proxies/Proxy Links/Existing Proxy Links/⭐️ InvisiProxy/InvisiProxy Links Archive.md"
 
-          # Archive old section if present
+          # If old section exists, append it directly to archive
           if grep -q '^### Current Month'\''s Links' "$file"; then
-            sed -n '/^### Current Month'\''s Links/,$p' "$file" > old_section.md
             {
               echo "### Archived Links ($month)"
               echo ""
-              tail -n +2 old_section.md   # skip the header line
+              sed -n '/^### Current Month'\''s Links/,$p' "$file" | tail -n +2   # skip the header line
               echo ""
             } >> "$archive"
           fi
@@ -40,7 +39,7 @@ jobs:
             | sed -n '/<div class="glist">/,/<\/div>/p' \
             | grep -oP '(?<=>)[^<]+' \
             | grep -E '([a-zA-Z0-9-]+\.)+(org|com|net|space|xyz|lol|life|bio|run|school|dev|world|info)$' \
-            > partners.txt
+            > "$(dirname "$file")/partners.txt"
 
           # Build new section
           {
@@ -48,12 +47,12 @@ jobs:
             echo ""
             while read -r link; do
               echo "- [$link]($link)"
-            done < partners.txt
-          } > new_section.md
+            done < "$(dirname "$file")/partners.txt"
+          } > "$(dirname "$file")/new_section.md"
 
           # Replace old section with new
           sed -i '/^### Current Month'\''s Links/,$d' "$file"
-          cat new_section.md >> "$file"
+          cat "$(dirname "$file")/new_section.md" >> "$file"
 
       - name: Commit changes
         run: |
