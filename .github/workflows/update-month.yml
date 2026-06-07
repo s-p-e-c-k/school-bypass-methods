@@ -18,10 +18,13 @@ jobs:
         with:
           ref: main
           
-      - name: Install pup
+     - name: Install pup
         run: |
-          sudo apt-get update
-          sudo apt-get install -y pup
+        curl -L https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_linux_amd64.zip -o pup.zip
+        sudo apt-get install -y unzip
+        unzip pup.zip
+        sudo mv pup /usr/local/bin/
+
 
       - name: Update month and partner links
         run: |
