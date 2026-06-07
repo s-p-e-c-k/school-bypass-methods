@@ -3,16 +3,16 @@ name: Update Repo Month
 on:
   schedule:
     - cron: '0 0 1 * *'   # Runs at midnight on the 1st of every month
-  workflow_dispatch:       # Manual trigger from Actions tab
+  workflow_dispatch:
 
 permissions:
-    contents: write    # Allow pushing commits back to the repo
-    
+  contents: write   # Allow pushing commits back to the repo
+
 jobs:
   update-month:
     runs-on: ubuntu-latest
     env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # Opt into Node.js 24 now
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout repo
@@ -23,8 +23,22 @@ jobs:
       - name: Update MONTH placeholder
         run: |
           month=$(date +'%B')
-          # Replace (MONTH) in all Markdown files
-          find . -type f -name "*.md" -print0 | xargs -0 sed -i "s/(MONTH)/($month)/g"
+          sed -i "s/(MONTH)/($month)/g" "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+
+      - name: Fetch partner links
+        run: |
+          # Grab all <a href="..."> links from the partners page
+          curl -s https://invisiproxy.com/partners \
+            | grep -oP '(?<=href=")https?://[^"]+' \
+            > partners.txt
+
+          echo "### Partner Links ($month)" > partners_section.md
+          while read -r link; do
+            echo "- [$link]($link)" >> partners_section.md
+          done < partners.txt
+
+          # Append partner links to the monthly file
+          cat partners_section.md >> "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
 
       - name: Commit changes
         run: |
@@ -34,6 +48,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update MONTH placeholder to $month"
+            git commit -m "Update MONTH placeholder and partner links"
             git push origin HEAD
           fi
