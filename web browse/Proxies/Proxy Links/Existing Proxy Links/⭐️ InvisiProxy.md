@@ -26,4 +26,4 @@ Every month, the creators of InvisiProxy restock all the partner links from a da
 [![InvisiProxy Discord Badge](https://img.shields.io/badge/Discord-InvisiProxy-5865F2?logo=discord&labelColour=E0E3FF)](https://discord.gg/unblocker)
  — https://discord.gg/unblocker
 
-### Current Month's Links (MONTH)
+### Current Month's Links (June)
