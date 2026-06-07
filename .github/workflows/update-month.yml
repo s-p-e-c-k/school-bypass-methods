@@ -26,7 +26,7 @@ jobs:
           # Extract only partner hrefs from the glist container
           curl -s https://invisiproxy.com/partners \
             | sed -n '/<div class="glist">/,/<\/div>/p' \
-            | grep -oP '(?<=href=")[^"]+' \
+            | grep -oP '(?<=>)[^<]+'
             > partners.txt
 
           # Build new section
