@@ -1,6 +1,3 @@
-## [< Back to Current Month's Mirror Links](%EF%B8%8F%20)
-
-
 ### Archived Links (June)
 
 
