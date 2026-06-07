@@ -18,7 +18,7 @@ jobs:
         with:
           ref: main
           
-       - name: Install pup
+      - name: Install pup
         run: |
           curl -L https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_linux_amd64.zip -o pup.zip
           sudo apt-get install -y unzip
