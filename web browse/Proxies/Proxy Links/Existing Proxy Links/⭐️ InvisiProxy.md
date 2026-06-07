@@ -28,8 +28,6 @@ Every month, the creators of InvisiProxy restock all the partner links from a da
 
 ### Current Month's Links (June)
 
-- [The Freedom Project [Partner]](The Freedom Project [Partner])
-- [Truffled [Partner]](Truffled [Partner])
 - [sleepsixsevensleep.org](sleepsixsevensleep.org)
 - [sixsevensleep.org](sixsevensleep.org)
 - [sleepeepsleepeep.org](sleepeepsleepeep.org)
