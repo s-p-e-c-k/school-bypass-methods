@@ -18,30 +18,28 @@ jobs:
         with:
           ref: main   # change if your default branch is 'master'
 
-      - name: Update month and partner links
-        run: |
-          month=$(date +'%B')
-          file=$(find . -type f -name "*InvisiProxy.md" | head -n 1)
-
-          # Extract only partner hrefs from the glist container
+       - name: Fetch partner links
+      run: |
+        month=$(date +'%B')
+        file=$(find . -type f -name "*InvisiProxy.md" | head -n 1)
           curl -s https://invisiproxy.com/partners \
-            | sed -n '/<div class="glist">/,/<\/div>/p' \
-            | grep -oP '(?<=>)[^<]+'
-            | grep -v '^$' \
-            > partners.txt
+          | sed -n '/<div class="glist">/,/<\/div>/p' \
+          | grep -oP '(?<=>)[^<]+' \
+          | grep -v '^$' \
+          > partners.txt
 
-          # Build new section
-          {
-            echo "### Current Month's Links ($month)"
-            echo ""
-            while read -r link; do
-              echo "- [$link]($link)"
-            done < partners.txt
-          } > new_section.md
+    {
+      echo "### Current Month's Links ($month)"
+      echo ""
+      while read -r link; do
+        echo "- [$link]($link)"
+      done < partners.txt
+    } > new_section.md
 
-          # Replace old section with new
-          sed -i '/^### Current Month'\''s Links/,$d' "$file"
-          cat new_section.md >> "$file"
+    # Replace old section with new
+    sed -i '/^### Current Month'\''s Links/,$d' "$file"
+    cat new_section.md >> "$file"
+
 
       - name: Commit changes
         run: |
