@@ -20,25 +20,25 @@ jobs:
         with:
           ref: main   # Change to 'master' if that's your default branch
 
-      - name: Update MONTH placeholder
-        run: |
-          month=$(date +'%B')
-          sed -i "s/(MONTH)/($month)/g" "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+    - name: Update MONTH placeholder
+  run: |
+    month=$(date +'%B')
+    sed -i "s/(MONTH)/($month)/g" "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
 
       - name: Fetch partner links
-        run: |
-          # Grab all <a href="..."> links from the partners page
-          curl -s https://invisiproxy.com/partners \
-            | grep -oP '(?<=href=")https?://[^"]+' \
-            > partners.txt
+  run: |
+    month=$(date +'%B')
+    curl -s https://invisiproxy.com/partners \
+      | grep -oP '(?<=href=")https?://[^"]+' \
+      > partners.txt
 
-          echo "### Partner Links ($month)" > partners_section.md
-          while read -r link; do
-            echo "- [$link]($link)" >> partners_section.md
-          done < partners.txt
+    echo "### Partner Links ($month)" > partners_section.md
+    while read -r link; do
+      echo "- [$link]($link)" >> partners_section.md
+    done < partners.txt
 
-          # Append partner links to the monthly file
-          cat partners_section.md >> "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+    # Append partner links to the monthly file
+    cat partners_section.md >> "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
 
       - name: Commit changes
         run: |
