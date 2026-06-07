@@ -3,7 +3,7 @@ name: Update Repo Month
 on:
   schedule:
     - cron: '0 0 1 * *'   # Runs at midnight on the 1st of every month
-  workflow_dispatch:       # Allows manual trigger from Actions tab
+  workflow_dispatch:       # Manual trigger from Actions tab
 
 jobs:
   update-month:
@@ -13,12 +13,14 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4   # Updated to v4 for Node.js 24 support
+        uses: actions/checkout@v4
+        with:
+          ref: main   # Make sure this matches your default branch name
 
       - name: Update MONTH placeholder
         run: |
           month=$(date +'%B')
-          # Safely replace {MONTH} in all Markdown files
+          # Replace {MONTH} in all Markdown files
           find . -type f -name "*.md" -print0 | xargs -0 sed -i "s/{MONTH}/$month/g"
 
       - name: Commit changes
@@ -26,5 +28,10 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add .
-          git commit -m "Update MONTH placeholder to $month" || echo "No changes to commit"
-          git push
+          # Only commit if there are changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update MONTH placeholder to $month"
+            git push
+          fi
