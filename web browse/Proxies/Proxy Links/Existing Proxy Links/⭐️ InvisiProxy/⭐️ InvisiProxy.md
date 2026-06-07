@@ -103,3 +103,12 @@ Every month, the creators of InvisiProxy restock all the partner links from a da
 - [canisleeppls.dev](canisleeppls.dev)
 - [hauntbanjo.org](hauntbanjo.org)
 - [holyunblocker.org](holyunblocker.org)
+
+--- 
+
+### Previous Mirror Links
+![Static Badge](https://img.shields.io/badge/These%20links%20are%20not%20being%20actively%20checked%3B%20they%20may%20not%20work!-749da1?style=flat-square)
+
+
+
+
