@@ -2,8 +2,8 @@ name: Update Repo Month
 
 on:
   schedule:
-    - cron: '0 0 1 * *'   # Runs at midnight on the 1st of every month
-  workflow_dispatch:
+    - cron: '0 0 1 * *'   # Runs at midnight UTC on the 1st of every month
+  workflow_dispatch:       # Manual trigger from Actions tab
 
 permissions:
   contents: write   # Allow pushing commits back to the repo
@@ -20,25 +20,23 @@ jobs:
         with:
           ref: main   # Change to 'master' if that's your default branch
 
-    - name: Update MONTH placeholder
-  run: |
-    month=$(date +'%B')
-    sed -i "s/(MONTH)/($month)/g" "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+      - name: Update MONTH placeholder
+        run: |
+          month=$(date +'%B')
+          sed -i "s/(MONTH)/($month)/g" "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
 
       - name: Fetch partner links
-  run: |
-    month=$(date +'%B')
-    curl -s https://invisiproxy.com/partners \
-      | grep -oP '(?<=href=")https?://[^"]+' \
-      > partners.txt
+        run: |
+          month=$(date +'%B')
+          curl -s https://invisiproxy.com/partners \
+            | grep -oP '(?<=href=")https?://[^"]+' \
+            > partners.txt
 
-    echo "### Partner Links ($month)" > partners_section.md
-    while read -r link; do
-      echo "- [$link]($link)" >> partners_section.md
-    done < partners.txt
-
-    # Append partner links to the monthly file
-    cat partners_section.md >> "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+          echo "" >> "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+          echo "### Partner Links ($month)" >> "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+          while read -r link; do
+            echo "- [$link]($link)" >> "school-bypass-methods/web browser/Proxies/Proxy Links/Existing Proxy Links/⭐ InvisiProxy.md"
+          done < partners.txt
 
       - name: Commit changes
         run: |
