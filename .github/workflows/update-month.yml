@@ -2,7 +2,7 @@ name: Update Repo Month
 
 on:
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: '0 0 1 * *'   # Runs at midnight UTC on the 1st of every month
   workflow_dispatch:
 
 permissions:
@@ -16,23 +16,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          ref: main
-          
-      - name: Install pup
-        run: |
-          curl -L https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_amd64.tar.gz -o pup.tar.gz
-          tar -xzf pup.tar.gz
-          sudo mv pup /usr/local/bin/
-
+          ref: main   # change if your default branch is 'master'
 
       - name: Update month and partner links
         run: |
           month=$(date +'%B')
           file=$(find . -type f -name "*InvisiProxy.md" | head -n 1)
 
-          # Fetch only partner hrefs from the glist container
+          # Extract only partner hrefs from the glist container
           curl -s https://invisiproxy.com/partners \
-            | pup 'div.glist a attr{href}' \
+            | sed -n '/<div class="glist">/,/<\/div>/p' \
+            | grep -oP '(?<=href=")[^"]+' \
             > partners.txt
 
           # Build new section
