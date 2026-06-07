@@ -5,6 +5,9 @@ on:
     - cron: '0 0 1 * *'   # Runs at midnight on the 1st of every month
   workflow_dispatch:       # Manual trigger from Actions tab
 
+permissions:
+    contents: write    # Allow pushing commits back to the repo
+    
 jobs:
   update-month:
     runs-on: ubuntu-latest
