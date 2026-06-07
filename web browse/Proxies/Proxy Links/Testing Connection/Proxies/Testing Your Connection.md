@@ -18,11 +18,12 @@ It is designed for macOS Terminal and provides clear feedback for each site.
 5. Results are saved into two files:
    - `good.txt` → all working sites
    - `bad.txt` → all failed sites
---
+---
 ## Usage
 1. Copy the code below [here](https://github.com/s-p-e-c-k/school-bypass-methods/blob/main/web%20browse/Proxies/Proxy%20Links/Testing%20Connection/Proxies/Testing%20Your%20Connection.md#code-for-terminal)
 2. Paste it into your Terminal tool!
 3. Paste your list of websites, then press Ctrl+D to finish.
+4. Wait until it finishes. You'll know when it prints "Done.", etc.
 
 ## Output Example
 ```
@@ -72,6 +73,12 @@ EOF
 
 chmod +x ~/Downloads/connection-test.sh && ~/Downloads/connection-test.sh
 ```
+## What do I do after this is done?
+The good sites (the sites that pass DNS blocking and internet restrictions, etc. can all be found by navigating to Finder, and pressing `⌘ (Command) + ⇧ (Shift) + G`, then pasting in the following:
+```
+~/good.txt
+```
+then pressing Return, and double-clicking on good.txt! Copy and paste whatever site you like into your browser of choice :)
 ---
 ## But wait, what if I don’t have Terminal?¹
 
@@ -89,7 +96,7 @@ If you don’t have Terminal available (for example, on a managed school Mac or 
   A modern, Electron‑based terminal emulator that runs shell scripts just like Terminal. Download from [hyper.is](https://hyper.is)
 
 - **[Alacritty](ca://s?q=Install_Alacritty_terminal_on_macOS)**  
-  A GPU‑accelerated terminal emulator that’s fast and lightweight. Download from their [GitHub](https://github.com/alacritty/alacritty/releases/latest/download/Alacritty-v0.17.0.dmg)
+  A GPU‑accelerated terminal emulator that’s fast and lightweight. Download from their [GitHub](https://github.com/alacritty/alacritty/releases/latest/download/Alacritty-v0.17.0.dmg).
 
 
 ⭐️ Creator's Note: I strongly recommend getting Visual Studio Code. It will be very helpful for later projects and tech stuff!
