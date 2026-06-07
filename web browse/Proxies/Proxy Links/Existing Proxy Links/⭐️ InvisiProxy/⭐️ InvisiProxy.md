@@ -109,6 +109,7 @@ Every month, the creators of InvisiProxy restock all the partner links from a da
 ### Previous Mirror Links
 ![Static Badge](https://img.shields.io/badge/These%20links%20are%20not%20being%20actively%20checked%3B%20they%20may%20not%20work!-749da1?style=flat-square)
 
-#### [Archived Links](web%20browse/Proxies/Proxy%20Links/Existing%20Proxy%20Links/⭐️%20InvisiProxy/InvisiProxy%20Links%20Archive.md)
+#### [Archived Links](InvisiProxy%20Links%20Archive.md)
+
 
 
