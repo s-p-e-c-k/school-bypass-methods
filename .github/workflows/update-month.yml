@@ -22,7 +22,7 @@ jobs:
         run: |
           curl -L https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_linux_amd64.zip -o pup_linux_amd64.zip
           sudo apt-get install -y unzip
-          unzip pup.zip
+          unzip pup_linux_amd64.zip
           sudo mv pup /usr/local/bin/
 
 
