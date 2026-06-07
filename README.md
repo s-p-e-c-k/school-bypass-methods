@@ -2,3 +2,10 @@
 a collection of the best bypass methods for school! (for MacOS)
 
 written by s-p-e-c-k (s_p_e_c_k on Discord)
+
+[![Profile Badge](https://img.shields.io/badge/GitHub-s--p--e--c--k-blue?logo=github)](https://github.com/s-p-e-c-k)
+
+
+## Acknowledgements
+This project uses or builds upon the following open-source repositories:
+* [InvisiProxy](https://github.com/QuiteAFancyEmerald/InvisiProxy) - Developed by [@QuiteAFancyEmerald](https://github.com/QuiteAFancyEmerald). Used under the [AGPL-3.0 license](https://github.com/QuiteAFancyEmerald/InvisiProxy/blob/master/LICENSE)).
