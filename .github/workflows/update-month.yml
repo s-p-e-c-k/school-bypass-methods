@@ -15,7 +15,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          ref: main   # Make sure this matches your default branch name
+          ref: main   # Change to 'master' if that's your default branch
 
       - name: Update MONTH placeholder
         run: |
@@ -23,7 +23,7 @@ jobs:
           # Replace (MONTH) in all Markdown files
           find . -type f -name "*.md" -print0 | xargs -0 sed -i "s/(MONTH)/($month)/g"
 
-           - name: Commit changes
+      - name: Commit changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
@@ -32,6 +32,5 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Update MONTH placeholder to $month"
-            git push origin HEAD:main
+            git push origin HEAD
           fi
-
