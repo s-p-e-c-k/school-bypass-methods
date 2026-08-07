@@ -2,7 +2,7 @@ name: Update Repo Month
 
 on:
   schedule:
-    - cron: '0 0 1 * *'   # Runs at midnight UTC on the 1st of every month
+    - cron: '0 0 1 * *'
   workflow_dispatch:
 
 permissions:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          ref: main   # change if your default branch is 'master'
+          ref: main
 
       - name: Archive old links and update
         run: |
@@ -29,24 +29,24 @@ jobs:
             {
               echo "### Archived Links ($month)"
               echo ""
-              sed -n '/^### Current Month'\''s Links/,$p' "$file" | tail -n +2   # skip the header line
+              sed -n '/^### Current Month'\''s Links/,$p' "$file" | tail -n +2
               echo ""
             } >> "$archive"
           fi
 
-          # Extract only real domains (exclude descriptive text)
+          # Extract only real domains
           curl -s https://invisiproxy.com/partners \
             | sed -n '/<div class="glist">/,/<\/div>/p' \
             | grep -oP '(?<=>)[^<]+' \
             | grep -E '([a-zA-Z0-9-]+\.)+(org|com|net|space|xyz|lol|life|bio|run|school|dev|world|info)$' \
             > "$(dirname "$file")/partners.txt"
 
-          # Build new section
+          # Build new section WITH https:// prefix
           {
             echo "### Current Month's Links ($month)"
             echo ""
             while read -r link; do
-              echo "- [$link]($link)"
+              echo "- [https://$link](https://$link)"
             done < "$(dirname "$file")/partners.txt"
           } > "$(dirname "$file")/new_section.md"
 
