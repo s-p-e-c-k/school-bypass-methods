@@ -1,4 +1,4 @@
-### Current Month's Links (August)
+### Current Month's Links (September)
 
 - [https://sleepsixsevensleep.org](https://sleepsixsevensleep.org)
 - [https://sixsevensleep.org](https://sixsevensleep.org)
